@@ -1,0 +1,15 @@
+// Основные стили приложения
+@import 'header';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #2d3035;
+    color: #ffffff;
+    min-height: 100vh;
+}
