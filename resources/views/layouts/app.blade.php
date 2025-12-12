@@ -12,9 +12,38 @@
 <body>
     <x-header />
     
-    <main class="main">
+    <main class="main" id="main-content">
         <x-nav />
-        @yield('content')
+        <div id="blog-anchor"></div>
+        <div id="projects-anchor"></div>
+        <div id="content">
+            @yield('content')
+        </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav__link');
+            navLinks.forEach(link => {
+                if (!link.hasAttribute('target')) {
+                    link.addEventListener('click', function(e) {
+                        // определяем якорь по ссылке
+                        let anchor = null;
+                        if (link.getAttribute('href') === '/blog') anchor = document.getElementById('blog-anchor');
+                        if (link.getAttribute('href') === '/projects') anchor = document.getElementById('projects-anchor');
+                        if (anchor) {
+                            setTimeout(() => {
+                                anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }, 100);
+                        } else {
+                            setTimeout(() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }, 100);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

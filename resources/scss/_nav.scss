@@ -39,27 +39,27 @@
 
         // Разные цвета для каждой ссылки
         &:nth-child(1)::after {
-            background: #ff6b35;
+            background: #4a90e2; // блог
         }
 
         &:nth-child(2)::after {
-            background: #4a90e2;
+            background: #f1c40f; // проекты
         }
 
         &:nth-child(3)::after {
-            background: #f1c40f;
+            background: #2ecc71; // гитхаб
         }
 
         &:nth-child(4)::after {
-            background: #2ecc71;
+            background: #9b59b6; // леттербоксэд
         }
 
         &:nth-child(5)::after {
-            background: #9b59b6;
+            background: #1abc9c; // телеграм
         }
 
         &:nth-child(6)::after {
-            background: #1abc9c;
+            background: #e91e63; // эпл музыка
         }
 
         // Активное состояние

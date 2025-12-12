@@ -3,26 +3,22 @@
 @section('title', 'Блог - denisunderonov')
 
 @section('content')
+    <div id="blog-anchor"></div>
     <div class="blog-list">
         <h1 class="blog-list__main-title">Блог</h1>
 
         <nav class="blog-nav">
-            <a href="#it" class="blog-nav__link {{ request()->get('category') == 'it' ? 'blog-nav__link--active' : '' }}" data-category="it">
-                IT
-            </a>
-            <a href="#design" class="blog-nav__link {{ request()->get('category') == 'design' ? 'blog-nav__link--active' : '' }}" data-category="design">
-                Дизайн
-            </a>
-            <a href="#music" class="blog-nav__link {{ request()->get('category') == 'music' ? 'blog-nav__link--active' : '' }}" data-category="music">
-                Музыка
-            </a>
-            <a href="#art" class="blog-nav__link {{ request()->get('category') == 'art' ? 'blog-nav__link--active' : '' }}" data-category="art">
-                Искусство
-            </a>
+            <button type="button" class="blog-nav__link" data-category="it">IT</button>
+            <button type="button" class="blog-nav__link" data-category="design">Дизайн</button>
+            <button type="button" class="blog-nav__link" data-category="music">Музыка</button>
+            <button type="button" class="blog-nav__link" data-category="art">Искусство</button>
+            <button type="button" class="blog-nav__link" data-category="photo">Фотографии</button>
         </nav>
+        {{-- Фотографии статьи --}}
+        <div class="blog-articles" id="photo" data-category="photo" style="display: none;"></div>
 
         {{-- IT статьи --}}
-        <div class="blog-articles" id="it" data-category="it" style="display: none;">
+    <div class="blog-articles" id="it" data-category="it" style="display: none;">
             <ul class="blog-articles__list">
                 <li class="blog-articles__item">
                     <a href="/blog/first-post" class="blog-articles__link">Моя первая статья</a>
@@ -37,7 +33,7 @@
         </div>
 
         {{-- Дизайн статьи --}}
-        <div class="blog-articles" id="design" data-category="design" style="display: none;">
+    <div class="blog-articles" id="design" data-category="design" style="display: none;">
             <ul class="blog-articles__list">
                 <li class="blog-articles__item">
                     <a href="/blog/minimalism" class="blog-articles__link">Минимализм в веб-дизайне</a>
@@ -49,7 +45,7 @@
         </div>
 
         {{-- Музыка статьи --}}
-        <div class="blog-articles" id="music" data-category="music" style="display: none;">
+    <div class="blog-articles" id="music" data-category="music" style="display: none;">
             <ul class="blog-articles__list">
                 <li class="blog-articles__item">
                     <a href="/blog/music-inspiration" class="blog-articles__link">Музыка как источник вдохновения</a>
@@ -72,40 +68,40 @@
             </ul>
         </div>
     </div>
-
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.blog-nav__link');
-            const articleSections = document.querySelectorAll('.blog-articles');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const category = this.getAttribute('data-category');
-                    
-                    // Убрать активный класс со всех ссылок
-                    navLinks.forEach(l => l.classList.remove('blog-nav__link--active'));
-                    
-                    // Скрыть все секции
-                    articleSections.forEach(section => {
-                        section.style.display = 'none';
-                    });
-                    
-                    // Показать выбранную секцию
-                    const targetSection = document.getElementById(category);
-                    if (targetSection) {
-                        if (this.classList.contains('blog-nav__link--active')) {
-                            // Если уже активна - скрываем
-                            this.classList.remove('blog-nav__link--active');
-                            targetSection.style.display = 'none';
-                        } else {
-                            // Активируем
-                            this.classList.add('blog-nav__link--active');
-                            targetSection.style.display = 'block';
-                        }
+        // Collapsible category lists — preserves existing styles
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.blog-nav__link');
+            const sections = document.querySelectorAll('.blog-articles');
+
+            function hideAll() {
+                sections.forEach(s => s.style.display = 'none');
+                buttons.forEach(b => b.classList.remove('blog-nav__link--active'));
+            }
+
+            // start collapsed
+            hideAll();
+
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const cat = this.dataset.category;
+                    const target = document.querySelector('.blog-articles[data-category="' + cat + '"]');
+                    if (!target) return;
+
+                    const visible = target.style.display !== 'none' && target.style.display !== '';
+
+                    hideAll();
+
+                    if (!visible) {
+                        target.style.display = 'block';
+                        this.classList.add('blog-nav__link--active');
+                        // ensure focus stays visible
+                        this.focus();
                     }
                 });
             });
         });
     </script>
+
 @endsection

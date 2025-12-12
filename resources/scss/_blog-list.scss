@@ -27,51 +27,66 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    padding: 0 1rem;
 
     &__link {
         font-family: 'Space Mono', monospace;
-        font-size: 1.2rem;
-        text-decoration: none;
-        color: #fff;
-        padding: 0.75rem 1rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: #fff;
+    padding: 1.1rem 1.5rem 1.1rem 1.5rem;
         position: relative;
         display: inline-block;
         align-self: flex-start;
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-weight: 400;
+        line-height: 1.2;
+        box-shadow: none;
+        transition: none;
 
         &::after {
             content: '';
             position: absolute;
-            bottom: 0;
             left: 0;
+            bottom: 0;
             width: 100%;
             height: 3px;
-            transform-origin: left;
-            transition: height 0.3s ease;
+            background: #fff;
             z-index: -1;
+            transition: height 0.3s cubic-bezier(0.4,0,0.2,1);
         }
+        position: relative;
+        z-index: 1;
 
-        // Цвета для каждой категории
         &[data-category="it"]::after {
-            background-color: #4a90e2;
+            background: #4a90e2;
         }
-
         &[data-category="design"]::after {
-            background-color: #9b59b6;
+            background: #9b59b6;
         }
-
         &[data-category="music"]::after {
-            background-color: #e74c3c;
+            background: #e74c3c;
         }
-
         &[data-category="art"]::after {
-            background-color: #f39c12;
+            background: #f39c12;
         }
-
-        &:hover::after {
-            height: 100%;
+        &[data-category="photo"]::after {
+            background: #00bcd4;
         }
 
         &--active {
+            font-weight: 400;
+            color: #fff;
+            &::after {
+                height: 100%;
+            }
+        }
+        &:hover,
+        &:focus {
+            color: #fff;
             &::after {
                 height: 100%;
             }
@@ -80,8 +95,8 @@
 
     @media (max-width: 768px) {
         &__link {
-            font-size: 1rem;
-            padding: 0.6rem 0;
+            font-size: 1.2rem;
+            padding: 1rem 1.2rem 1rem 1.2rem;
         }
     }
 }
@@ -90,6 +105,7 @@
 .blog-articles {
     max-width: 600px;
     margin: 2rem auto 3rem;
+    padding: 0 1rem;
 
     &__list {
         list-style: none;
@@ -101,16 +117,13 @@
     }
 
     &__link {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Space Mono', monospace;
         font-size: 1rem;
         color: #fff;
         text-decoration: none;
-        display: block;
-        padding: 0.5rem 0;
-
-        &:hover {
-            text-decoration: underline;
-        }
+        display: inline-block;
+        padding: 0.75rem 0;
+        border-bottom: 3px solid #fff;
     }
 
     @media (max-width: 768px) {
@@ -123,6 +136,8 @@
 // Адаптивность
 @media (max-width: 480px) {
     .blog-list {
+        padding: 3rem 1.5rem 0;
+        
         &__main-title {
             font-size: 1.7rem;
         }

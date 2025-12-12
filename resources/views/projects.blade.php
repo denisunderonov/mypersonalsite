@@ -3,6 +3,7 @@
 @section('title', 'Проекты - denisunderonov')
 
 @section('content')
+    <div id="projects-anchor"></div>
     <div class="projects">
         <h1 class="projects__main-title">Мои Проекты</h1>
 
