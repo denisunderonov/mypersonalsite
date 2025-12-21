@@ -8,127 +8,127 @@
         <h1 class="projects__main-title">Мои Проекты</h1>
 
         {{-- Большие проекты --}}
-        <section class="projects__section">
-            <h2 class="projects__section-title">Большие проекты</h2>
-            
-            <div class="projects__grid">
-                <article class="project-card">
-                    <h3 class="project-card__title">Персональный сайт-портфолио</h3>
-                    
-                    <p class="project-card__description">
-                        Современный веб-сайт с блогом и портфолио, построенный на Laravel и PostgreSQL. 
-                        Включает адаптивный дизайн, динамическую навигацию и систему управления контентом.
-                    </p>
-                    
-                    <div class="project-card__tags">
-                        <span class="project-card__tag">Laravel</span>
-                        <span class="project-card__tag">PostgreSQL</span>
-                        <span class="project-card__tag">SCSS</span>
-                        <span class="project-card__tag">Docker</span>
-                    </div>
-                    
-                    <div class="project-card__links">
-                        <a href="https://denisunderonov.webp" target="_blank" class="project-card__link">
-                            Посмотреть сайт
-                        </a>
-                        <a href="https://github.com/denisunderonov" target="_blank" class="project-card__link">
-                            GitHub
-                        </a>
-                    </div>
-                </article>
-
-                <article class="project-card">
-                    <h3 class="project-card__title">E-commerce платформа</h3>
-                    
-                    <p class="project-card__description">
-                        Полнофункциональный интернет-магазин с корзиной, системой оплаты и админ-панелью. 
-                        Реализована интеграция с платёжными системами и управление заказами.
-                    </p>
-                    
-                    <div class="project-card__tags">
-                        <span class="project-card__tag">Laravel</span>
-                        <span class="project-card__tag">Vue.js</span>
-                        <span class="project-card__tag">Stripe</span>
-                    </div>
-                    
-                    <div class="project-card__links">
-                        <a href="#" target="_blank" class="project-card__link">
-                            Посмотреть сайт
-                        </a>
-                        <a href="https://github.com" target="_blank" class="project-card__link">
-                            GitHub
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </section>
+        @if(isset($projects['big']) && $projects['big']->isNotEmpty())
+            <section class="projects__section">
+                <h2 class="projects__section-title">Большие проекты</h2>
+                
+                <div class="projects__grid">
+                    @foreach($projects['big'] as $project)
+                        <article class="project-card">
+                            <h3 class="project-card__title">{{ $project->title }}</h3>
+                            
+                            <p class="project-card__description">
+                                {{ $project->description }}
+                            </p>
+                            
+                            @if($project->tags && count($project->tags) > 0)
+                                <div class="project-card__tags">
+                                    @foreach($project->tags as $tag)
+                                        <span class="project-card__tag">{{ $tag }}</span>
+                                    @endforeach
+                                </div>
+                            @endif
+                            
+                            <div class="project-card__links">
+                                @if($project->site_url)
+                                    <a href="{{ $project->site_url }}" target="_blank" class="project-card__link">
+                                        Посмотреть сайт
+                                    </a>
+                                @endif
+                                @if($project->github_url)
+                                    <a href="{{ $project->github_url }}" target="_blank" class="project-card__link">
+                                        GitHub
+                                    </a>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
         {{-- Учебные проекты --}}
-        <section class="projects__section">
-            <h2 class="projects__section-title">Учебные проекты</h2>
-            
-            <div class="projects__grid">
-                <article class="project-card project-card--small">
-                    <h3 class="project-card__title">Todo приложение</h3>
-                    
-                    <p class="project-card__description">
-                        Простое приложение для управления задачами с возможностью добавления, редактирования и удаления задач.
-                    </p>
-                    
-                    <div class="project-card__tags">
-                        <span class="project-card__tag">React</span>
-                        <span class="project-card__tag">Node.js</span>
-                    </div>
-                    
-                    <div class="project-card__links">
-                        <a href="#" target="_blank" class="project-card__link">
-                            GitHub
-                        </a>
-                    </div>
-                </article>
+        @if(isset($projects['educational']) && $projects['educational']->isNotEmpty())
+            <section class="projects__section">
+                <h2 class="projects__section-title">Учебные проекты</h2>
+                
+                <div class="projects__grid">
+                    @foreach($projects['educational'] as $project)
+                        <article class="project-card project-card--small">
+                            <h3 class="project-card__title">{{ $project->title }}</h3>
+                            
+                            <p class="project-card__description">
+                                {{ $project->description }}
+                            </p>
+                            
+                            @if($project->tags && count($project->tags) > 0)
+                                <div class="project-card__tags">
+                                    @foreach($project->tags as $tag)
+                                        <span class="project-card__tag">{{ $tag }}</span>
+                                    @endforeach
+                                </div>
+                            @endif
+                            
+                            <div class="project-card__links">
+                                @if($project->site_url)
+                                    <a href="{{ $project->site_url }}" target="_blank" class="project-card__link">
+                                        Демо
+                                    </a>
+                                @endif
+                                @if($project->github_url)
+                                    <a href="{{ $project->github_url }}" target="_blank" class="project-card__link">
+                                        GitHub
+                                    </a>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
-                <article class="project-card project-card--small">
-                    <h3 class="project-card__title">Погодное приложение</h3>
-                    
-                    <p class="project-card__description">
-                        Веб-приложение для отображения погоды с использованием API. Показывает текущую погоду и прогноз.
-                    </p>
-                    
-                    <div class="project-card__tags">
-                        <span class="project-card__tag">JavaScript</span>
-                        <span class="project-card__tag">API</span>
-                    </div>
-                    
-                    <div class="project-card__links">
-                        <a href="#" target="_blank" class="project-card__link">
-                            Демо
-                        </a>
-                        <a href="#" target="_blank" class="project-card__link">
-                            GitHub
-                        </a>
-                    </div>
-                </article>
+        {{-- Другие проекты --}}
+        @if(isset($projects['other']) && $projects['other']->isNotEmpty())
+            <section class="projects__section">
+                <h2 class="projects__section-title">Другие проекты</h2>
+                
+                <div class="projects__grid">
+                    @foreach($projects['other'] as $project)
+                        <article class="project-card project-card--small">
+                            <h3 class="project-card__title">{{ $project->title }}</h3>
+                            
+                            <p class="project-card__description">
+                                {{ $project->description }}
+                            </p>
+                            
+                            @if($project->tags && count($project->tags) > 0)
+                                <div class="project-card__tags">
+                                    @foreach($project->tags as $tag)
+                                        <span class="project-card__tag">{{ $tag }}</span>
+                                    @endforeach
+                                </div>
+                            @endif
+                            
+                            <div class="project-card__links">
+                                @if($project->site_url)
+                                    <a href="{{ $project->site_url }}" target="_blank" class="project-card__link">
+                                        Посмотреть
+                                    </a>
+                                @endif
+                                @if($project->github_url)
+                                    <a href="{{ $project->github_url }}" target="_blank" class="project-card__link">
+                                        GitHub
+                                    </a>
+                                @endif
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
-                <article class="project-card project-card--small">
-                    <h3 class="project-card__title">Калькулятор</h3>
-                    
-                    <p class="project-card__description">
-                        Интерактивный калькулятор с современным интерфейсом и поддержкой различных операций.
-                    </p>
-                    
-                    <div class="project-card__tags">
-                        <span class="project-card__tag">HTML</span>
-                        <span class="project-card__tag">CSS</span>
-                        <span class="project-card__tag">JS</span>
-                    </div>
-                    
-                    <div class="project-card__links">
-                        <a href="#" target="_blank" class="project-card__link">
-                            GitHub
-                        </a>
-                    </div>
-                </article>
-            </div>
-        </section>
+        @if(!isset($projects['big']) && !isset($projects['educational']) && !isset($projects['other']))
+            <p style="color: #aaa; text-align: center; padding: 3rem;">Проектов пока нет</p>
+        @endif
     </div>
 @endsection

@@ -14,58 +14,83 @@
             <button type="button" class="blog-nav__link" data-category="art">Искусство</button>
             <button type="button" class="blog-nav__link" data-category="photo">Фотографии</button>
         </nav>
-        {{-- Фотографии статьи --}}
-        <div class="blog-articles" id="photo" data-category="photo" style="display: none;"></div>
+
+        {{-- Фотографии --}}
+        <div class="blog-articles" id="photo" data-category="photo" style="display: none;">
+            @if($photos->isEmpty())
+                <p style="color: #aaa; text-align: center; padding: 2rem;">Фотографий пока нет</p>
+            @else
+                <div class="photo-gallery">
+                    @foreach($photos as $photo)
+                        <div class="photo-item">
+                            <img src="{{ asset('storage/' . $photo->image) }}" alt="{{ $photo->title }}">
+                            @if($photo->title)
+                                <p class="photo-title">{{ $photo->title }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
 
         {{-- IT статьи --}}
-    <div class="blog-articles" id="it" data-category="it" style="display: none;">
-            <ul class="blog-articles__list">
-                <li class="blog-articles__item">
-                    <a href="/blog/first-post" class="blog-articles__link">Моя первая статья</a>
-                </li>
-                <li class="blog-articles__item">
-                    <a href="/blog/laravel-tips" class="blog-articles__link">Laravel: Советы и трюки</a>
-                </li>
-                <li class="blog-articles__item">
-                    <a href="/blog/docker-basics" class="blog-articles__link">Docker для начинающих</a>
-                </li>
-            </ul>
+        <div class="blog-articles" id="it" data-category="it" style="display: none;">
+            @if(isset($articles['it']) && $articles['it']->isNotEmpty())
+                <ul class="blog-articles__list">
+                    @foreach($articles['it'] as $article)
+                        <li class="blog-articles__item">
+                            <a href="/blog/{{ $article->slug }}" class="blog-articles__link">{{ $article->title }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p style="color: #aaa; text-align: center; padding: 2rem;">Статей пока нет</p>
+            @endif
         </div>
 
         {{-- Дизайн статьи --}}
-    <div class="blog-articles" id="design" data-category="design" style="display: none;">
-            <ul class="blog-articles__list">
-                <li class="blog-articles__item">
-                    <a href="/blog/minimalism" class="blog-articles__link">Минимализм в веб-дизайне</a>
-                </li>
-                <li class="blog-articles__item">
-                    <a href="/blog/color-theory" class="blog-articles__link">Теория цвета для веб-дизайнеров</a>
-                </li>
-            </ul>
+        <div class="blog-articles" id="design" data-category="design" style="display: none;">
+            @if(isset($articles['design']) && $articles['design']->isNotEmpty())
+                <ul class="blog-articles__list">
+                    @foreach($articles['design'] as $article)
+                        <li class="blog-articles__item">
+                            <a href="/blog/{{ $article->slug }}" class="blog-articles__link">{{ $article->title }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p style="color: #aaa; text-align: center; padding: 2rem;">Статей пока нет</p>
+            @endif
         </div>
 
         {{-- Музыка статьи --}}
-    <div class="blog-articles" id="music" data-category="music" style="display: none;">
-            <ul class="blog-articles__list">
-                <li class="blog-articles__item">
-                    <a href="/blog/music-inspiration" class="blog-articles__link">Музыка как источник вдохновения</a>
-                </li>
-                <li class="blog-articles__item">
-                    <a href="/blog/playlist-coding" class="blog-articles__link">Идеальный плейлист для кодинга</a>
-                </li>
-            </ul>
+        <div class="blog-articles" id="music" data-category="music" style="display: none;">
+            @if(isset($articles['music']) && $articles['music']->isNotEmpty())
+                <ul class="blog-articles__list">
+                    @foreach($articles['music'] as $article)
+                        <li class="blog-articles__item">
+                            <a href="/blog/{{ $article->slug }}" class="blog-articles__link">{{ $article->title }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p style="color: #aaa; text-align: center; padding: 2rem;">Статей пока нет</p>
+            @endif
         </div>
 
         {{-- Искусство статьи --}}
         <div class="blog-articles" id="art" data-category="art" style="display: none;">
-            <ul class="blog-articles__list">
-                <li class="blog-articles__item">
-                    <a href="/blog/digital-art" class="blog-articles__link">Цифровое искусство и технологии</a>
-                </li>
-                <li class="blog-articles__item">
-                    <a href="/blog/art-inspiration" class="blog-articles__link">Где искать вдохновение художнику</a>
-                </li>
-            </ul>
+            @if(isset($articles['art']) && $articles['art']->isNotEmpty())
+                <ul class="blog-articles__list">
+                    @foreach($articles['art'] as $article)
+                        <li class="blog-articles__item">
+                            <a href="/blog/{{ $article->slug }}" class="blog-articles__link">{{ $article->title }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @else
+                <p style="color: #aaa; text-align: center; padding: 2rem;">Статей пока нет</p>
+            @endif
         </div>
     </div>
     

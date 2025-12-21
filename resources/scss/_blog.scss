@@ -100,6 +100,27 @@
         }
     }
 
+    &__image {
+        margin: 2rem 0;
+        border-radius: 8px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+
+    &__category {
+        font-family: 'Inter', sans-serif;
+        background: rgba(74, 144, 226, 0.2);
+        color: #4a90e2;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+    }
+
     &__list {
         margin: 1.5rem 0;
         padding-left: 2rem;
@@ -113,6 +134,24 @@
         margin-top: 3rem;
         padding-top: 2rem;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+
+    &__back-link {
+        font-family: 'Space Mono', monospace;
+        font-size: 1rem;
+        color: #4a90e2;
+        text-decoration: none;
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: 2px solid #4a90e2;
+        border-radius: 6px;
+        transition: all 0.3s;
+
+        &:hover {
+            background: #4a90e2;
+            color: #ffffff;
+        }
     }
 
     &__tags {

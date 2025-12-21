@@ -133,6 +133,44 @@
     }
 }
 
+// Фото-галерея
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #1a1c1f;
+
+    img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.photo-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: #fff;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
 // Адаптивность
 @media (max-width: 480px) {
     .blog-list {
@@ -153,5 +191,9 @@
         &__link {
             font-size: 0.95rem;
         }
+    }
+
+    .photo-gallery {
+        grid-template-columns: 1fr;
     }
 }
