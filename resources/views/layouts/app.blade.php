@@ -36,35 +36,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav__link');
+            // Прокрутка к нужному элементу после загрузки страницы
+            const currentPath = window.location.pathname;
             
-            navLinks.forEach(link => {
-                // Пропускаем внешние ссылки (target="_blank")
-                if (!link.hasAttribute('target')) {
-                    link.addEventListener('click', function(e) {
-                        const href = link.getAttribute('href');
-                        
-                        // Определяем, нужна ли прокрутка
-                        if (href === '/blog') {
-                            // Прокручиваем к категориям в блоге
-                            setTimeout(() => {
-                                const categories = document.getElementById('blog-categories');
-                                if (categories) {
-                                    categories.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                            }, 100);
-                        } else if (href === '/projects') {
-                            // Прокручиваем к началу проектов
-                            setTimeout(() => {
-                                const anchor = document.getElementById('projects-anchor');
-                                if (anchor) {
-                                    anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }, 100);
-                        }
-                    });
-                }
-            });
+            if (currentPath === '/blog') {
+                setTimeout(() => {
+                    const categories = document.getElementById('blog-categories');
+                    if (categories) {
+                        categories.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 300);
+            } else if (currentPath === '/projects') {
+                setTimeout(() => {
+                    const anchor = document.getElementById('projects-anchor');
+                    if (anchor) {
+                        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 300);
+            }
         });
     </script>
     
