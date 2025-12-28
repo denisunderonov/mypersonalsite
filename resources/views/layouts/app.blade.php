@@ -14,12 +14,13 @@
             $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
             $cssFile = $manifest['resources/scss/app.scss']['file'] ?? null;
             $jsFile = $manifest['resources/js/app.js']['file'] ?? null;
+            $baseUrl = config('app.env') === 'production' ? secure_asset('build/') : asset('build/');
         @endphp
         @if($cssFile)
-            <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
+            <link rel="stylesheet" href="{{ secure_asset('build/' . $cssFile) }}">
         @endif
         @if($jsFile)
-            <script type="module" src="{{ asset('build/' . $jsFile) }}"></script>
+            <script type="module" src="{{ secure_asset('build/' . $jsFile) }}"></script>
         @endif
     @else
         @vite(['resources/scss/app.scss', 'resources/js/app.js'])
