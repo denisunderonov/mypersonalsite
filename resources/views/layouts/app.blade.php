@@ -31,30 +31,30 @@
     
     <main class="main" id="main-content">
         <x-nav />
-        <div id="blog-anchor"></div>
-        <div id="projects-anchor"></div>
-        <div id="content">
-            @yield('content')
-        </div>
+        @yield('content')
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav__link')
+            const navLinks = document.querySelectorAll('.nav__link');
+            
             navLinks.forEach(link => {
+                // Пропускаем внешние ссылки (target="_blank")
                 if (!link.hasAttribute('target')) {
                     link.addEventListener('click', function(e) {
-                        // определяем якорь по ссылке
-                        let anchor = null;
-                        if (link.getAttribute('href') === '/blog') anchor = document.getElementById('blog-anchor');
-                        if (link.getAttribute('href') === '/projects') anchor = document.getElementById('projects-anchor');
-                        if (anchor) {
+                        const href = link.getAttribute('href');
+                        
+                        // Определяем, нужна ли прокрутка
+                        if (href === '/blog' || href === '/projects') {
+                            // Даем странице загрузиться, затем прокручиваем
                             setTimeout(() => {
-                                anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }, 100);
-                        } else {
-                            setTimeout(() => {
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                const anchor = href === '/blog' 
+                                    ? document.getElementById('blog-anchor')
+                                    : document.getElementById('projects-anchor');
+                                    
+                                if (anchor) {
+                                    anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
                             }, 100);
                         }
                     });

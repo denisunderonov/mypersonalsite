@@ -121,8 +121,14 @@
                     if (!visible) {
                         target.style.display = 'block';
                         this.classList.add('blog-nav__link--active');
-                        // ensure focus stays visible
-                        this.focus();
+                        
+                        // Плавная прокрутка к статьям
+                        setTimeout(() => {
+                            target.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'start' 
+                            });
+                        }, 50);
                     }
                 });
             });

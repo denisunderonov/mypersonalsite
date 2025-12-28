@@ -33,5 +33,10 @@ $header-padding: 2rem;
         font-weight: 400;
         color: $header-text;
         text-decoration: none;
+        
+        // Мобильная версия - уменьшаем заголовок
+        @media (max-width: 768px) {
+            font-size: 1.1rem;
+        }
     }
 }

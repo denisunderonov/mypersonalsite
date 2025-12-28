@@ -34,13 +34,16 @@
         }
 
         // Эффект при наведении - прямоугольник вырастает
-        &:hover::after {
-            height: 100%;
-            z-index: -1;
-        }
+        // Отключаем на тач-устройствах для избежания багов
+        @media (hover: hover) and (pointer: fine) {
+            &:hover::after {
+                height: 100%;
+                z-index: -1;
+            }
 
-        &:hover {
-            color: #2d3035;
+            &:hover {
+                color: #2d3035;
+            }
         }
 
         // Разные цвета для каждой ссылки
