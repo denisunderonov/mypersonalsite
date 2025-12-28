@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Регистрируем middleware для отслеживания посетителей
+        // appendToGroup('web', ...) добавляет middleware в группу 'web'
+        // Это значит что TrackVisitor будет запускаться для всех веб-страниц
+        $middleware->appendToGroup('web', \App\Http\Middleware\TrackVisitor::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

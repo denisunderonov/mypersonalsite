@@ -24,7 +24,7 @@ class AdminUserSeeder extends Seeder
         // create() - создает новую запись и сразу сохраняет в базу
         \App\Models\User::create([
             'name' => 'Denis Underonov', // Имя администратора
-            'email' => 'denisunderonov@admin.com', // Email для входа в админку
+            'email' => 'denisunderonov2@gmail.com', // Email для входа в админку
             // bcrypt() хеширует пароль перед сохранением
             // Никогда не храним пароли в открытом виде!
             // При входе Laravel сравнит введенный пароль с этим хешем
@@ -32,7 +32,7 @@ class AdminUserSeeder extends Seeder
         ]);
         
         // После запуска этого сидера админ сможет войти в /admin/login
-        // используя email: denisunderonov@admin.com
+        // используя email: denisunderonov2@gmail.com
         // и пароль: Denimz13141314..
     }
 }

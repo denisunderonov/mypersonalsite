@@ -33,6 +33,15 @@
             </div>
             <a href="{{ route('admin.photos.index') }}" class="admin-stat-card__link">Управление</a>
         </div>
+
+        <div class="admin-stat-card admin-stat-card--purple">
+            <div class="admin-stat-card__icon">👥</div>
+            <div class="admin-stat-card__content">
+                <div class="admin-stat-card__number">{{ $stats['visitors'] }}</div>
+                <div class="admin-stat-card__label">Уникальных посетителей</div>
+                <div class="admin-stat-card__sublabel">{{ $stats['visitors_month'] }} за месяц</div>
+            </div>
+        </div>
     </div>
 
     <div class="admin-quick-links">

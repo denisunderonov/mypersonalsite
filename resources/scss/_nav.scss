@@ -5,6 +5,12 @@
     gap: 1rem;
     align-items: center;
     margin-bottom: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
 
     &__link {
         font-family: 'Space Mono', monospace;

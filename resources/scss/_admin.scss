@@ -136,6 +136,10 @@
         border-color: #00bcd4;
     }
 
+    &--purple {
+        border-color: #9b59b6;
+    }
+
     &__icon {
         font-size: 3rem;
         margin-bottom: 1rem;
@@ -156,6 +160,13 @@
         font-family: 'Inter', sans-serif;
         font-size: 1.1rem;
         color: #aaa;
+    }
+
+    &__sublabel {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        color: #888;
+        margin-top: 0.5rem;
     }
 
     &__link {
