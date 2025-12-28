@@ -45,13 +45,18 @@
                         const href = link.getAttribute('href');
                         
                         // Определяем, нужна ли прокрутка
-                        if (href === '/blog' || href === '/projects') {
-                            // Даем странице загрузиться, затем прокручиваем
+                        if (href === '/blog') {
+                            // Прокручиваем к категориям в блоге
                             setTimeout(() => {
-                                const anchor = href === '/blog' 
-                                    ? document.getElementById('blog-anchor')
-                                    : document.getElementById('projects-anchor');
-                                    
+                                const categories = document.getElementById('blog-categories');
+                                if (categories) {
+                                    categories.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }, 100);
+                        } else if (href === '/projects') {
+                            // Прокручиваем к началу проектов
+                            setTimeout(() => {
+                                const anchor = document.getElementById('projects-anchor');
                                 if (anchor) {
                                     anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
                                 }

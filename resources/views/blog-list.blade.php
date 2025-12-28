@@ -7,7 +7,7 @@
     <div class="blog-list">
         <h1 class="blog-list__main-title">Блог</h1>
 
-        <nav class="blog-nav">
+        <nav class="blog-nav" id="blog-categories">
             <button type="button" class="blog-nav__link" data-category="it">IT</button>
             <button type="button" class="blog-nav__link" data-category="design">Дизайн</button>
             <button type="button" class="blog-nav__link" data-category="music">Музыка</button>
