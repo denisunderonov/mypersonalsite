@@ -8,7 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oi&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    @if(file_exists(public_path('build/manifest.json')))
+        @php
+            $manifest = json_decode(file_get_contents(public_path('build/manifest.json')), true);
+            $cssFile = $manifest['resources/scss/app.scss']['file'] ?? null;
+            $jsFile = $manifest['resources/js/app.js']['file'] ?? null;
+        @endphp
+        @if($cssFile)
+            <link rel="stylesheet" href="{{ asset('build/' . $cssFile) }}">
+        @endif
+        @if($jsFile)
+            <script type="module" src="{{ asset('build/' . $jsFile) }}"></script>
+        @endif
+    @else
+        @vite(['resources/scss/app.scss', 'resources/js/app.js'])
+    @endif
 </head>
 <body class="admin-body">
     <header class="admin-header">
