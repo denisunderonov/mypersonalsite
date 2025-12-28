@@ -1,1 +1,1 @@
-web: php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+web: export $(echo $DATABASE_URL | sed -E 's|postgresql://([^:]+):([^@]+)@([^:]+):([^/]+)/(.+)|DB_HOST=\3 DB_PORT=\4 DB_DATABASE=\5 DB_USERNAME=\1 DB_PASSWORD=\2|') && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
