@@ -46,6 +46,23 @@ Route::get('/projects', [ProjectsController::class, 'index']);
 // name('admin.login') позволяет обращаться к этому маршруту по имени
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
 
+// Временный роут для создания админа (удалить после первого использования!)
+Route::get('/admin/setup-user', function() {
+    $user = \App\Models\User::where('email', 'denisunderonov2@gmail.com')->first();
+    
+    if ($user) {
+        return 'Пользователь уже существует: ' . $user->email . ' (ID: ' . $user->id . ')';
+    }
+    
+    $newUser = \App\Models\User::create([
+        'name' => 'Denis Underonov',
+        'email' => 'denisunderonov2@gmail.com',
+        'password' => bcrypt('Denimz13141314..'),
+    ]);
+    
+    return 'Админ создан! Email: ' . $newUser->email . ', Пароль: Denimz13141314..';
+});
+
 // Обрабатывает форму входа (POST запрос с email и паролем)
 Route::post('/admin/login', [LoginController::class, 'login']);
 
