@@ -1,4 +1,5 @@
 import './bootstrap';
+import './photos';
 
 // Плавная прокрутка к контенту при клике на навигацию
 document.addEventListener('DOMContentLoaded', function() {

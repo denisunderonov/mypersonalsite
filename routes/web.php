@@ -39,6 +39,9 @@ Route::get('/blog/{slug}', [BlogController::class, 'show']);
 // Вызывает метод index() в ProjectsController
 Route::get('/projects', [ProjectsController::class, 'index']);
 
+// Страница фотографий
+Route::get('/photos', [App\Http\Controllers\PhotosController::class, 'index']);
+
 // МАРШРУТЫ АУТЕНТИФИКАЦИИ АДМИНА
 // Эти роуты НЕ защищены middleware - иначе админ не сможет войти
 
