@@ -21,6 +21,7 @@
         position: relative;
         padding: 8px 16px;
         transition: all 0.3s ease;
+        white-space: nowrap; // Запрещаем перенос текста
 
         // Линия под ссылкой (по умолчанию)
         &::after {
@@ -48,11 +49,11 @@
 
         // Разные цвета для каждой ссылки
         &:nth-child(1)::after {
-            background: #4a90e2; // блог
+            background: #4a90e2; // проекты
         }
 
         &:nth-child(2)::after {
-            background: #f1c40f; // проекты
+            background: #f1c40f; // фотографии
         }
 
         &:nth-child(3)::after {
@@ -60,15 +61,19 @@
         }
 
         &:nth-child(4)::after {
-            background: #9b59b6; // леттербоксэд
+            background: #9b59b6; // инстаграм
         }
 
         &:nth-child(5)::after {
-            background: #1abc9c; // телеграм
+            background: #1abc9c; // леттербоксэд
         }
 
         &:nth-child(6)::after {
-            background: #e91e63; // эпл музыка
+            background: #e91e63; // телеграм
+        }
+
+        &:nth-child(7)::after {
+            background: #ff6b6b; // эпл музыка
         }
 
         // Активное состояние
