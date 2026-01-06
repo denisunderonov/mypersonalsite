@@ -13,11 +13,11 @@
         @else
             <div class="photos__grid">
                 @foreach($photos as $photo)
-                    <div class="photo-item" data-photo-id="{{ $photo->id }}">
+                    <div class="photos-item" data-photo-id="{{ $photo->id }}">
                         <img 
                             src="{{ asset('storage/' . $photo->image) }}" 
                             alt="{{ $photo->title ?? 'Фото' }}"
-                            class="photo-item__image"
+                            class="photos-item__image"
                             loading="lazy"
                         >
                     </div>

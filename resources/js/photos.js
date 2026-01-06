@@ -1,11 +1,13 @@
 // Модальное окно для фотографий
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('photoModal');
+    if (!modal) return;
+    
     const modalImage = modal.querySelector('.photo-modal__image');
     const modalCaption = modal.querySelector('.photo-modal__caption');
     const modalClose = modal.querySelector('.photo-modal__close');
     const modalOverlay = modal.querySelector('.photo-modal__overlay');
-    const photoItems = document.querySelectorAll('.photo-item');
+    const photoItems = document.querySelectorAll('.photos-item');
     
     // Получаем данные фотографий из JSON
     const photosDataElement = document.getElementById('photos-data');
@@ -49,8 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.overflow = '';
     }
 
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', closeModal);
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
     
     // Закрытие по ESC
     document.addEventListener('keydown', function(e) {
