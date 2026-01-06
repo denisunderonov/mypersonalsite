@@ -1,5 +1,7 @@
 .projects {
-    padding-top: 3rem;
+    padding: 3rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
 
     &__main-title {
         font-family: 'Space Mono', monospace;
@@ -96,6 +98,8 @@
 // Адаптивность
 @media (max-width: 768px) {
     .projects {
+        padding: 2rem 2rem;
+        
         &__main-title {
             font-size: 2rem;
             margin-bottom: 2rem;
@@ -135,6 +139,8 @@
 
 @media (max-width: 480px) {
     .projects {
+        padding: 1.5rem 1.5rem;
+        
         &__main-title {
             font-size: 1.7rem;
         }
