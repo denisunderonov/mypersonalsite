@@ -65,14 +65,18 @@
         }
 
         &:nth-child(5)::after {
-            background: #1abc9c; // леттербоксэд
+            background: #ff0000; // ютуб
         }
 
         &:nth-child(6)::after {
-            background: #e91e63; // телеграм
+            background: #1abc9c; // леттербоксэд
         }
 
         &:nth-child(7)::after {
+            background: #e91e63; // телеграм
+        }
+
+        &:nth-child(8)::after {
             background: #ff6b6b; // эпл музыка
         }
 
