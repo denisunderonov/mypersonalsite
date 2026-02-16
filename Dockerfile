@@ -41,6 +41,8 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 EXPOSE 10000
 
 # Команда запуска (Render передаёт $PORT через переменную окружения)
-CMD php artisan migrate --force && \
+# Если в Render в Environment добавлена RUN_MIGRATE_FRESH=1 — один раз выполнится migrate:fresh (сброс таблиц).
+# После успешного деплоя удали RUN_MIGRATE_FRESH из Environment.
+CMD if [ "$RUN_MIGRATE_FRESH" = "1" ]; then php artisan migrate:fresh --force; else php artisan migrate --force; fi && \
     php artisan storage:link && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-10000}

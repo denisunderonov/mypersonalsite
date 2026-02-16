@@ -148,4 +148,37 @@
 - **500 на сайте** — открой в Render вкладку **Logs** и посмотри текст ошибки внизу лога.
 - **Не грузятся стили** — убедись, что `APP_URL` в Environment точно совпадает с URL сайта в браузере (с `https://`).
 
+### Ошибка миграций: «current transaction is aborted» / «users_email_unique»
+
+Так бывает, если миграции когда-то частично выполнились и база в Neon осталась в некорректном состоянии. Нужно один раз сбросить схему и заново применить миграции.
+
+**Вариант 1 — сброс в Neon (рекомендуется):**
+
+1. Зайди в [Neon Console](https://console.neon.tech), открой свой проект.
+2. Слева выбери **SQL Editor**.
+3. Выполни по очереди:
+   ```sql
+   DROP SCHEMA public CASCADE;
+   CREATE SCHEMA public;
+   GRANT ALL ON SCHEMA public TO neondb_owner;
+   GRANT ALL ON SCHEMA public TO public;
+   ```
+   (если у тебя другой владелец БД — замени `neondb_owner` на него или выполни только первые две строки).
+4. Сохрани изменения, затем в Render нажми **Manual Deploy** → **Deploy latest commit**. Миграции выполнятся заново на чистой схеме.
+
+**Вариант 2 — через Render Shell:**
+
+1. В Render открой сервис → **Shell**.
+2. Выполни: `php artisan migrate:fresh --force` (удалит все таблицы и заново применит миграции).
+3. Затем снова создай админа: `php artisan db:seed --class=AdminUserSeeder --force`.
+4. Обнови страницу сайта.
+
+**Вариант 3 — сброс через переменную окружения (без правки Neon):**
+
+1. В Render открой сервис → **Environment** → **Add Environment Variable**.
+2. Добавь переменную: ключ `RUN_MIGRATE_FRESH`, значение `1`. Сохрани (Render перезапустит деплой).
+3. Дождись успешного деплоя — миграции выполнятся заново (таблицы будут пересозданы).
+4. В **Shell** выполни: `php artisan db:seed --class=AdminUserSeeder --force`
+5. В **Environment** удали переменную `RUN_MIGRATE_FRESH` и сохрани, чтобы следующие деплои не сбрасывали базу.
+
 Дальше при каждом `git push` в ветку `main` Render будет автоматически пересобирать и деплоить проект.
