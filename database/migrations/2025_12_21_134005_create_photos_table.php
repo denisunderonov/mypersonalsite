@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Schema;
 // Создаём миграцию как анонимный класс
 return new class extends Migration
 {
+    public $withinTransaction = false;
+
     /**
      * Запускаем миграцию - создаём таблицу для фотогалереи
      */
     public function up(): void
     {
-        // Создаём таблицу photos для хранения фотографий
+        Schema::dropIfExists('photos');
         Schema::create('photos', function (Blueprint $table) {
             // Уникальный идентификатор фотографии
             $table->id();

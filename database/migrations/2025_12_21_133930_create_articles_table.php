@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Schema;
 // Создаём анонимный класс миграции - так делается в Laravel 8+
 return new class extends Migration
 {
+    public $withinTransaction = false;
+
     /**
      * Запускаем миграцию - создаём таблицу для статей блога
      */
     public function up(): void
     {
-        // Создаём новую таблицу articles в базе данных
+        Schema::dropIfExists('articles');
         Schema::create('articles', function (Blueprint $table) {
             // Автоинкрементный ID - первичный ключ
             $table->id();

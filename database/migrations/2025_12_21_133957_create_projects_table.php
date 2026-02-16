@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Schema;
 // Анонимный класс миграции - современный подход Laravel
 return new class extends Migration
 {
+    public $withinTransaction = false;
+
     /**
      * Применяем миграцию - создаём таблицу для хранения проектов
      */
     public function up(): void
     {
-        // Создаём таблицу projects в базе данных
+        Schema::dropIfExists('projects');
         Schema::create('projects', function (Blueprint $table) {
             // ID проекта - автоинкрементный первичный ключ
             $table->id();

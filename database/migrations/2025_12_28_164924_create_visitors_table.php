@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Schema;
 // Тут мы храним информацию о уникальных визитах на сайт
 return new class extends Migration
 {
+    public $withinTransaction = false;
+
     /**
      * Запускает миграцию - создает таблицу visitors
      * 
@@ -17,6 +19,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('visitors');
         Schema::create('visitors', function (Blueprint $table) {
             // Автоинкрементный ID каждого визита
             $table->id();
