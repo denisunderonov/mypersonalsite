@@ -61,12 +61,11 @@
 | **Region** | Выбери, например, **Frankfurt (EU Central)**. |
 | **Branch** | Должно быть **main**. |
 | **Root Directory** | Оставь пустым. |
-| **Runtime** | Выбери **Docker** (в проекте есть Dockerfile). |
-| **Build Command** | Оставь **пустым** (всё выполняется в Dockerfile). |
-| **Start Command** | Оставь **пустым** (команда запуска в Dockerfile). |
+| **Language** | В выпадающем списке выбери **Docker** (не Node). От этого поля зависит, что будет собираться: при Docker сборка идёт по Dockerfile. |
+| **Build Command** | Если поле **обязательное** и не исчезает при выборе Docker — вставь одну из строк: `true` или `echo "Docker"`. При Language = Docker Render всё равно собирает образ из Dockerfile, это значение не используется. |
+| **Start Command** | Оставь пустым (запуск задаётся в Dockerfile). |
 
-**Важно:** Если Render всё равно требует Build Command, вставь:  
-`echo "Build выполняется в Dockerfile"`
+**Важно:** В Render тип окружения задаётся полем **Language** (не Runtime). Обязательно выбери **Docker**, иначе будет среда Node и команда `composer` не найдётся.
 
 Остальное пока не трогай.
 
