@@ -1,0 +1,31 @@
+# Render Blueprint — бесплатный деплой
+# База данных: создай на Neon.tech и добавь DB_URL в Environment вручную
+
+services:
+  - type: web
+    name: mypersonalsite
+    runtime: nixpacks
+
+    buildCommand: ""
+    startCommand: php artisan migrate --force && php artisan storage:link && php artisan serve --host=0.0.0.0 --port=$PORT
+
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_LOCALE
+        value: ru
+      - key: LOG_LEVEL
+        value: error
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      # Добавь вручную в Render Dashboard:
+      # - APP_KEY (php artisan key:generate --show)
+      # - APP_URL (https://твой-сервис.onrender.com)
+      # - DB_CONNECTION=pgsql
+      # - DB_URL (строка из Neon.tech)
