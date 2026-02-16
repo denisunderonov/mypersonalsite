@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
+     * Не оборачивать в транзакцию — на Neon (PostgreSQL) DDL в транзакции может приводить к "transaction aborted".
+     */
+    public $withinTransaction = false;
+
+    /**
      * Run the migrations.
      */
     public function up(): void
