@@ -41,6 +41,8 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 EXPOSE 10000
 
 # Команда запуска (Render передаёт $PORT через переменную окружения)
+# Сидер создаёт админа при каждом деплое (firstOrCreate — без дубликатов), Shell не нужен
 CMD php artisan migrate --force && \
+    php artisan db:seed --class=AdminUserSeeder --force && \
     php artisan storage:link && \
     php artisan serve --host=0.0.0.0 --port=${PORT:-10000}

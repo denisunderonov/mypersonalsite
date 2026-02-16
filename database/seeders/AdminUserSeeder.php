@@ -1,38 +1,31 @@
 <?php
 
-// Пространство имен для сидеров (классов заполнения базы тестовыми данными)
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder; // Базовый класс для всех сидеров
+use Illuminate\Database\Seeder;
 
-// Сидер для создания пользователя-администратора
-// Запускается командой: php artisan db:seed --class=AdminUserSeeder
-// Или через php artisan migrate:fresh --seed если добавлен в DatabaseSeeder
+/**
+ * Создаёт админа из переменных окружения (ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME).
+ * Данные не хранятся в коде — только в .env или в настройках хостинга.
+ */
 class AdminUserSeeder extends Seeder
 {
-    /**
-     * Запускает заполнение базы данных
-     * 
-     * Этот метод создает одного админа с заранее заданными данными
-     * Используется для первоначальной настройки системы
-     */
     public function run(): void
     {
-        // Создаем запись в таблице users
-        // \App\Models\User - полный путь к модели (с обратным слешем)
-        // create() - создает новую запись и сразу сохраняет в базу
-        \App\Models\User::create([
-            'name' => 'Denis Underonov', // Имя администратора
-            'email' => 'denisunderonov2@gmail.com', // Email для входа в админку
-            // bcrypt() хеширует пароль перед сохранением
-            // Никогда не храним пароли в открытом виде!
-            // При входе Laravel сравнит введенный пароль с этим хешем
-            'password' => bcrypt('Denimz13141314..'), // Захешированный пароль
-        ]);
-        
-        // После запуска этого сидера админ сможет войти в /admin/login
-        // используя email: denisunderonov2@gmail.com
-        // и пароль: Denimz13141314..
+        $email = env('ADMIN_EMAIL');
+        $password = env('ADMIN_PASSWORD');
+        $name = env('ADMIN_NAME', 'Admin');
+
+        if (empty($email) || empty($password)) {
+            return;
+        }
+
+        \App\Models\User::firstOrCreate(
+            ['email' => $email],
+            [
+                'name' => $name,
+                'password' => bcrypt($password),
+            ]
+        );
     }
 }
