@@ -11,6 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Удаляем таблицы, если остались от неудачного прошлого деплоя (Neon и т.п.)
+        Schema::dropIfExists('sessions');
+        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('users');
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
